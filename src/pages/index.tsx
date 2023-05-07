@@ -1,118 +1,235 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import Image from 'next/image';
+import logo from '@/public/images/logo.png';
+import Divider from '@/components/Divider';
+import Section from '@/components/Section';
 
-const inter = Inter({ subsets: ['latin'] })
+import sekilasImg from '@/public/images/dummy2.jpg';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import Podcast from '@/components/Podcast';
+
+import { getUserTweets } from '@/utils/twitter';
+
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+} from 'react-icons/fa';
+
+import { Iceland, Open_Sans } from 'next/font/google';
+import Link from 'next/link';
+import Celotehan from '@/components/Celotehan';
+import { GetServerSideProps } from 'next';
+import Twitter from 'twitter-lite';
+
+const iceland = Iceland({ weight: '400', subsets: ['latin'] });
+const opensans = Open_Sans({ subsets: ['latin'] });
+
+// type Tweet = {
+//   created_at: string;
+//   author_id: string;
+//   text: string;
+// };
+
+// type Props = {
+//   tweets: Tweet[];
+// };
 
 export default function Home() {
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <main className="min-h-screen mx-4 md:mx-12 font-sans">
+        <nav className="flex justify-between w-full px-4 py-4 md:mt-2">
+          <Image src={logo} alt="Aldie Nusa Putra" height={50} />
+          <div className="hidden md:block">
+            <ul className="flex gap-8 h-full items-end font-display font-bold text-sm">
+              <li>SEKILAS</li>
+              <li>PODCAST</li>
+              <li>CELOTEHAN</li>
+              <li>KONTAK</li>
+            </ul>
+          </div>
+        </nav>
+        <Divider />
+        <Section className="mx-2 md:mx-8">
+          <h1 className="font-display text-2xl md:text-4xl lg:text-6xl">
+            BOSEN ‘GAK SIH <span className="italic">KELEN </span>
+            <br />
+            <span className="inline-block">
+              <span className="font-semibold">INDONESIA GINI-GINI AJA?</span>
+            </span>
+          </h1>
+        </Section>
+        <Divider />
+        <Section>
+          <div className="relative flex items-center justify-center">
+            <video
+              loop
+              autoPlay
+              muted
+              poster="/images/dummy1.png"
+              className="w-full object-cover h-[500px]"
+            >
+              <source src="/videos/sample.mp4" type="video/mp4" />
+            </video>
+            <div className="flex justify-between items-center px-12 mb-12 w-full absolute bottom-0 left-0">
+              <div className="flex flex-col gap-2 font-display font-bold">
+                <h2 className=" text-white">UNTUK INDONESIA</h2>
+                <button className="bg-white py-1 w-1/2 text-sm">WATCH</button>
+              </div>
+              <Image src={logo} width={100} height={100} alt="ALDIE" />
+            </div>
+          </div>
+        </Section>
+        <Divider />
+        <Section className="px-2 md:px-8">
+          <div className="md:grid md:grid-cols-2 md:gap-2">
+            <div className="flex flex-col">
+              <h2 className="tracking-wider text-xl mb-4">SEKILAS</h2>
+              <div className="relative">
+                <span className="font-black text-6xl italic absolute top-0 left-0">{`"`}</span>
+                <h1 className="text-4xl font-script italic ml-8 mt-8">
+                  Yuk, bangun <b>Indonesia</b>,
+                  <br />
+                  Mulai dari <b>Sumatera Utara!</b>
+                </h1>
+              </div>
+              <div className="flex flex-col gap-6 ml-8 mt-8">
+                <p>
+                  Kelen tau nggak? Sumatera Utara adalah potensi kelapa sawit
+                  nomor satu dunia! Apabila dimanfaatkan dengan baik, maka
+                  keuntungannya bisa menggenjot perekonomian daerah senilai Rp
+                  .... loh!
+                </p>
+                <p>blablabvlabalabalalbt laborum</p>
+                <p>
+                  Yuk sama-sama kita bangun{' '}
+                  <span className="font-bold">Indonesia</span>, mulai dari{' '}
+                  <span className="font-bold">Sumatera Utara!</span>
+                </p>
+              </div>
+            </div>
+            <div className="flex justify-center w-full mt-12 md:mt-0 ">
+              <Image src={sekilasImg} alt="ALDIE" width={350} height={100} />
+            </div>
+          </div>
+        </Section>
+        <Divider />
+        <Section className="relative">
+          {/* <h2 className="absolute top-6 left-8 tracking-wider text-xl z-10">
+            PODCAST
+          </h2> */}
+          {/* <h2 className="tracking-wider text-xl mb-4 ml-8">PODCAST</h2> */}
+          <Podcast />
+        </Section>
+        <Divider />
+        <Section className="px-2 md:px-8">
+          <div className="flex flex-col">
+            <h2 className="tracking-wider text-xl mb-4">CELOTEHAN ALDIE</h2>
+            <Celotehan />
+          </div>
+        </Section>
+        {/* <Divider />
+        <Section className="px-2 md:px-8">
+          <div className="flex flex-col">
+            <h2 className="tracking-wider text-xl mb-4">
+              LATEST INSTAGRAM UPDATE
+            </h2>
+            <Celotehan />
+          </div>
+        </Section> */}
+      </main>
+      <footer className="bg-black px-14 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="flex flex-col gap-6 font-display text-aldie-yellow font-bold">
+            <div className="flex flex-col">
+              <p>ALDIE NUSA PUTRA</p>
+              <span className={iceland.className}>with Partai Ummat</span>
+            </div>
+            <p>+628999999660</p>
+            <p>aldienusa@gmail.com</p>
+          </div>
+          <div className="flex flex-col gap-6">
+            <p className="font-display text-aldie-yellow font-bold">
+              Kritik dan saran
+            </p>
+            <form
+              onSubmit={(event) => {
+                event.preventDefault();
+              }}
+              className="flex flex-col gap-6 text-white"
+            >
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                className={`${opensans.className} bg-black border border-white rounded-lg px-4 py-4 outline-none`}
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="E-mail"
+                className={`${opensans.className} bg-black border border-white rounded-lg px-4 py-4 outline-none`}
+              />
+              <input
+                type="phone"
+                name="phone"
+                placeholder="No. Telepon / Whatsapp"
+                className={`${opensans.className} bg-black border border-white rounded-lg px-4 py-4 outline-none`}
+              />
+              <textarea
+                name="pesan"
+                cols={30}
+                rows={5}
+                placeholder="Pesan anda"
+                className={`${opensans.className} bg-black border border-white rounded-lg px-4 py-4 outline-none`}
+              ></textarea>
+              <button
+                type="submit"
+                className={`${opensans.className} bg-aldie-yellow px-8 py-3 text-black`}
+              >
+                KIRIM
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+        <div className="flex justify-between text-white font-sans mt-12">
+          <div className="flex flex-row gap-4">
+            <div className="bg-white rounded-full hover:scale-110">
+              <Link href="">
+                <FaFacebookF className="text-4xl text-black p-2" />
+              </Link>
+            </div>
+            <div className="bg-white rounded-full hover:scale-110">
+              <Link href="">
+                <FaTwitter className="text-4xl text-black p-2" />
+              </Link>
+            </div>
+            <div className="bg-white rounded-full hover:scale-110">
+              <Link href="">
+                <FaLinkedin className="text-4xl text-black p-2" />
+              </Link>
+            </div>
+            <div className="bg-white rounded-full hover:scale-110">
+              <Link href="">
+                <FaInstagram className="text-4xl text-black p-2" />
+              </Link>
+            </div>
+          </div>
+          <span>
+            © {new Date().getFullYear()} @noosakreatif, All Rights Reserved.
+          </span>
+        </div>
+      </footer>
+    </>
+  );
 }
+
+// export async function getServerSideProps() {
+//   const tweets = await getUserTweets();
+//   return {
+//     props: {
+//       tweets: tweets,
+//     },
+//   };
+// }
