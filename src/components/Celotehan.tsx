@@ -39,7 +39,7 @@ export default function Celotehan() {
   };
   return (
     <div className="relative">
-      <FaTwitter className="absolute bottom-0 right-12 text-4xl" />
+      <FaTwitter className="absolute bottom-0 right-12 text-4xl z-50" />
       <Carousel
         infiniteLoop
         showThumbs={false}
@@ -66,7 +66,7 @@ export default function Celotehan() {
       >
         {quotes.map((item, i) => (
           <div className="py-6 px-14 h-full" key={i}>
-            <div className="flex h-full justify-center items-center">
+            <div className="flex h-full justify-center items-center flex-col gap-4 md:gap-0 md:flex-row">
               <Image
                 alt="dummy"
                 src={item.img}

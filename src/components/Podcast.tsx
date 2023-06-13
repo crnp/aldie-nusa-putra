@@ -10,7 +10,7 @@ import { Carousel } from 'react-responsive-carousel';
 import Youtube, { YouTubeProps } from 'react-youtube';
 
 export default function Podcast() {
-  const [podcastId, setPodcastId] = useState('');
+  const [podcastId, setPodcastId] = useState('C7OQHIpDlvA');
   const [watchingPodcast, setWatchingPodcast] = useState(false);
   const arrowStyles: CSSProperties = {
     position: 'absolute',
@@ -21,10 +21,10 @@ export default function Podcast() {
     cursor: 'pointer',
   };
 
-  function podcastWatch(event: MouseEvent, id: string): void {
-    setPodcastId(id);
-    setWatchingPodcast(true);
-  }
+  // function podcastWatch(event: MouseEvent, id: string): void {
+  //   setPodcastId(id);
+  //   setWatchingPodcast(true);
+  // }
 
   const opts = {
     height: 600,
@@ -44,6 +44,10 @@ export default function Podcast() {
       id: 'UaVTIH8mujA',
     },
   ];
+  function carouselChangeHandler(index: number, item: React.ReactNode): void {
+    setPodcastId(podcasts[index].id);
+  }
+
   return (
     <>
       <Carousel
@@ -51,6 +55,7 @@ export default function Podcast() {
         showThumbs={false}
         showStatus={false}
         showIndicators={false}
+        onChange={carouselChangeHandler}
         renderArrowPrev={(onClickHandler, hasPrev, label) =>
           hasPrev && (
             <FaChevronCircleLeft
@@ -77,14 +82,20 @@ export default function Podcast() {
           >
             <img src={item.thumb} />
             <button
-              className="absolute bottom-8 left-12 text-xl z-10 px-4 py-2 bg-white rounded-lg hover:scale-105"
-              onClick={(event) => podcastWatch(event, item.id)}
+              className="hidden md:block absolute bottom-8 left-12 text-xl z-10 px-4 py-2 bg-white rounded-lg hover:scale-105"
+              onClick={() => setWatchingPodcast(true)}
             >
               WATCH
             </button>
           </div>
         ))}
       </Carousel>
+      <button
+        className="block md:hidden px-4 py-2 bg-gray-200 rounded-lg"
+        onClick={() => setWatchingPodcast(true)}
+      >
+        WATCH
+      </button>
       {watchingPodcast && (
         <>
           <Youtube

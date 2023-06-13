@@ -3,11 +3,14 @@ import { ReactNode } from 'react';
 
 interface ISection {
   className?: string;
+  id?: string;
   children: ReactNode;
 }
 
 export default function Section(props: ISection) {
   return (
-    <section className={cx('my-10', props.className)}>{props.children}</section>
+    <section className={cx('my-10', props.className)} id={props.id}>
+      {props.children}
+    </section>
   );
 }

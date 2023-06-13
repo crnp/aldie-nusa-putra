@@ -43,10 +43,46 @@ export default function Home() {
           <Image src={logo} alt="Aldie Nusa Putra" height={50} />
           <div className="hidden md:block">
             <ul className="flex gap-8 h-full items-end font-display font-bold text-sm">
-              <li>SEKILAS</li>
-              <li>PODCAST</li>
-              <li>CELOTEHAN</li>
-              <li>KONTAK</li>
+              <li
+                className="hover:cursor-pointer"
+                onClick={() => {
+                  document
+                    .getElementById('sekilas')
+                    ?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                SEKILAS
+              </li>
+              <li
+                className="hover:cursor-pointer"
+                onClick={() => {
+                  document
+                    .getElementById('podcast')
+                    ?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                PODCAST
+              </li>
+              <li
+                className="hover:cursor-pointer"
+                onClick={() => {
+                  document
+                    .getElementById('celotehan')
+                    ?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                CELOTEHAN
+              </li>
+              <li
+                className="hover:cursor-pointer"
+                onClick={() => {
+                  document
+                    .getElementById('kontak')
+                    ?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                KONTAK
+              </li>
             </ul>
           </div>
         </nav>
@@ -82,7 +118,7 @@ export default function Home() {
           </div>
         </Section>
         <Divider />
-        <Section className="px-2 md:px-8">
+        <Section className="px-2 md:px-8" id="sekilas">
           <div className="md:grid md:grid-cols-2 md:gap-2">
             <div className="flex flex-col">
               <h2 className="tracking-wider text-xl mb-4">SEKILAS</h2>
@@ -101,7 +137,7 @@ export default function Home() {
                   keuntungannya bisa menggenjot perekonomian daerah senilai Rp
                   .... loh!
                 </p>
-                <p>blablabvlabalabalalbt laborum</p>
+                {/* <p>blablabvlabalabalalbt laborum</p> */}
                 <p>
                   Yuk sama-sama kita bangun{' '}
                   <span className="font-bold">Indonesia</span>, mulai dari{' '}
@@ -115,7 +151,7 @@ export default function Home() {
           </div>
         </Section>
         <Divider />
-        <Section className="relative">
+        <Section className="relative" id="podcast">
           {/* <h2 className="absolute top-6 left-8 tracking-wider text-xl z-10">
             PODCAST
           </h2> */}
@@ -123,7 +159,7 @@ export default function Home() {
           <Podcast />
         </Section>
         <Divider />
-        <Section className="px-2 md:px-8">
+        <Section className="px-2 md:px-8" id="celotehan">
           <div className="flex flex-col">
             <h2 className="tracking-wider text-xl mb-4">CELOTEHAN ALDIE</h2>
             <Celotehan />
@@ -139,7 +175,7 @@ export default function Home() {
           </div>
         </Section> */}
       </main>
-      <footer className="bg-black px-14 py-10">
+      <footer className="bg-black px-14 py-10" id="kontak">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex flex-col gap-6 font-display text-aldie-yellow font-bold">
             <div className="flex flex-col">
